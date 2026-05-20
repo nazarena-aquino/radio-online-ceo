@@ -4,11 +4,11 @@
   "description": "Radio Online Backend API",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "db:migrate": "ts-node src/db/migrate.ts"
-  },
+  "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+  "build": "tsc && node dist/db/migrate.js",
+  "start": "node dist/index.js",
+  "db:migrate": "ts-node src/db/migrate.ts"
+},
   "dependencies": {
     "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.17",
