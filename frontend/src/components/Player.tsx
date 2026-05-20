@@ -8,7 +8,7 @@ export default function Player() {
 
   const isPlaying = status === 'playing';
   const isLoading = status === 'loading';
-  const isError = status === 'error';
+  const isError   = status === 'error';
 
   return (
     <div className="player">
@@ -16,13 +16,13 @@ export default function Player() {
 
         {/* Info */}
         <div className="player__info">
-          <div className="player__live-dot" />
+          <div className="player__icon-box">📻</div>
           <div>
             <div className="player__station-name">{currentStation.name}</div>
             <div className="player__status">
               {isLoading && <span className="player__status-text loading">Conectando...</span>}
               {isPlaying && <span className="player__status-text playing">● EN VIVO</span>}
-              {isError && <span className="player__status-text error">Error de conexión</span>}
+              {isError   && <span className="player__status-text error">Error de conexión</span>}
               {status === 'paused' && <span className="player__status-text paused">Pausado</span>}
             </div>
           </div>
@@ -35,13 +35,7 @@ export default function Player() {
             onClick={isPlaying ? pause : play}
             disabled={isLoading}
           >
-            {isLoading ? (
-              <span className="spinner" />
-            ) : isPlaying ? (
-              '⏸'
-            ) : (
-              '▶'
-            )}
+            {isLoading ? <span className="spinner" /> : isPlaying ? '⏸' : '▶'}
           </button>
           <button className="player__btn player__btn--stop" onClick={stop} title="Detener">
             ■
@@ -50,7 +44,7 @@ export default function Player() {
 
         {/* Volume */}
         <div className="player__volume">
-          <button className="player__mute" onClick={toggleMute} title={isMuted ? 'Activar sonido' : 'Silenciar'}>
+          <button className="player__mute" onClick={toggleMute} title={isMuted ? 'Activar' : 'Silenciar'}>
             {isMuted || volume === 0 ? '🔇' : volume < 0.5 ? '🔉' : '🔊'}
           </button>
           <input
@@ -59,14 +53,14 @@ export default function Player() {
             max={1}
             step={0.01}
             value={isMuted ? 0 : volume}
-            onChange={(e) => setVolume(parseFloat(e.target.value))}
+            onChange={e => setVolume(parseFloat(e.target.value))}
             className="player__slider"
           />
         </div>
 
-        {/* Bitrate info */}
+        {/* Meta */}
         <div className="player__meta">
-          <span>{currentStation.bitrate}kbps</span>
+          <span>{currentStation.bitrate} kbps</span>
           {currentStation.genre && <span>{currentStation.genre}</span>}
         </div>
 
